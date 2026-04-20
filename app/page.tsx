@@ -20,12 +20,15 @@ export default function Dashboard() {
       setWeather(data);
 
       if (data.hourly) {
-        const history = data.hourly.time.slice(0, 12).map((t, i) => ({
-          time: new Date(t).getHours() + 'h',
-          temp: data.hourly.temperature_2m[i]
-        }));
-        setChartData(history);
-      }
+        const history = data.hourly.time
+          .slice(0, 12)
+          .map((t: string, i: number) => ({
+            time: new Date(t).getHours() + 'h',
+            temp: data.hourly?.temperature_2m[i] ?? 0
+          }));
+
+  setChartData(history);
+}
     } catch (e) {
       console.error(e);
     } finally {
